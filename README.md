@@ -10,6 +10,15 @@ Following are the description of files
 - Route53.py - This script creates a new hosted zone for the domain name 'example.com', creates A records for an EC2 instance and a load balancer, and configures weighted routing, latency-based routing, and geolocation routing policies. It also creates health checks for the resources to monitor their availability and associate them with the resource record sets. You'll need to replace the values for the IP address, DNS name, hosted zone ID, and other parameters with your own values.
 
 - three-tier-app - ![Architecture Diagram](https://github.com/aws-samples/aws-three-tier-web-architecture-workshop/blob/main/application-code/web-tier/src/assets/3TierArch.png)
+    In this architecture, a public-facing Application Load Balancer forwards client traffic to our web tier EC2 instances. The web tier is running Nginx webservers that are configured to serve a React.js website and redirects our API calls to the application tier’s internal facing load balancer. The internal facing load balancer then forwards that traffic to the application tier, which is written in Node.js. The application tier manipulates data in an Aurora MySQL multi-AZ database and returns it to our web tier. Load balancing, health checks and autoscaling groups are created at each layer to maintain the availability of this architecture.
 
-In this architecture, a public-facing Application Load Balancer forwards client traffic to our web tier EC2 instances. The web tier is running Nginx webservers that are configured to serve a React.js website and redirects our API calls to the application tier’s internal facing load balancer. The internal facing load balancer then forwards that traffic to the application tier, which is written in Node.js. The application tier manipulates data in an Aurora MySQL multi-AZ database and returns it to our web tier. Load balancing, health checks and autoscaling groups are created at each layer to maintain the availability of this architecture.
+- ECS-Cluster - launch containerized applications on a new ECS cluster using Fargate, use ECR to store and manage container images and EKS to deploy and manage Kubernetes clusters. Experiment with different container orchestration techniques, including load balancing, scaling, and service discovery using AWS CLI.
+
+- database - sample codes to functionalities of rds and neptune
+
+- data-analytics - The provided Python code demonstrates the use of the Kinesis Client Library (KCL) to process data from a Kinesis stream, and store it in DynamoDB. It defines the KCL configuration and runs the KCL process using the KCLProcess class.
+
+- ml - The provided Python codes demonstrate how to use AWS Rekognition for image analysis, Transcribe for audio transcription, and Textract for text and data extraction from documents. Proper AWS authentication is required.
+
+
 

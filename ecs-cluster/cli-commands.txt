@@ -1,0 +1,25 @@
+-> Creating an ecr repository
+aws ecr create-repository --repository-name my-repo --image-scanning-configuration scanOnPush=true --region us-west-2
+
+-> Build and push your Docker image to ECR
+
+docker build -t my-repo:latest .
+$(aws ecr get-login --no-include-email --region us-west-2)
+docker tag my-repo:latest <aws_account_id>.dkr.ecr.us-west-2.amazonaws.com/my-repo:latest
+docker push <aws_account_id>.dkr.ecr.us-west-2.amazonaws.com/my-repo:latest
+
+-> Create an ECS cluster
+
+aws ecs create-cluster --cluster-name my-cluster --region us-west-2
+
+-> Create a task definition
+
+aws ecs register-task-definition --cli-input-json file://task-definition.json --region us-west-2
+
+-> Launch a Fargate task
+
+aws ecs run-task --cluster my-cluster --task-definition my-repo --launch-type FARGATE --network-configuration "awsvpcConfiguration={subnets=[subnet-12345678],securityGroups=[sg-12345678],assignPublicIp=ENABLED}" --region us-west-2
+
+-> Load balancing and scaling
+
+aws elbv2 create-load-balancer --name my-alb --subnets subnet-123456 subnet-789012 --security-groups sg-123456 --region us-west

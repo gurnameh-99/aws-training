@@ -1,0 +1,18 @@
+{
+    "family": "my-task",
+    "containerDefinitions": [
+        {
+            "name": "my-container",
+            "image": "<aws_account_id>.dkr.ecr.us-west-2.amazonaws.com/my-repo:latest",
+            "cpu": 256,
+            "memory": 512,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "protocol": "tcp"
+                }
+            ]
+        }
+    ]
+}
